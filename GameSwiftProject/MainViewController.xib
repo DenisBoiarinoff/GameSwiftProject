@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController" customModule="GameSwiftProject" customModuleProvider="target">
+            <connections>
+                <outlet property="titleLabel" destination="XSQ-h6-9MR" id="ihX-O5-khh"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Default" translatesAutoresizingMaskIntoConstraints="NO" id="KZX-F9-SG4">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MxV-S8-BFs">
+                    <rect key="frame" x="30" y="246" width="540" height="108"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="MxV-S8-BFs" secondAttribute="height" multiplier="5:1" id="4X3-Ti-Izc"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="howtoplay_ipad"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t13-MZ-4nX">
+                    <rect key="frame" x="30" y="321" width="540" height="108"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="t13-MZ-4nX" secondAttribute="height" multiplier="5:1" id="HLN-Fa-JeO"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="store_ipad"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sI7-VF-HyL">
+                    <rect key="frame" x="30" y="171" width="540" height="108"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="sI7-VF-HyL" secondAttribute="height" multiplier="5:1" id="GCc-qQ-Vfb"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="play_ipad"/>
+                    <connections>
+                        <action selector="toPlayController:" destination="-1" eventType="touchUpInside" id="xuk-Iq-7Id"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pru-Ua-C7f">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Riddles" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XSQ-h6-9MR">
+                            <rect key="frame" x="272" y="20" width="57" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A9G-Kd-n29">
+                            <rect key="frame" x="570" y="15" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="A9G-Kd-n29" secondAttribute="height" multiplier="1:1" id="EjY-H2-6fl"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="sound-on"/>
+                            <connections>
+                                <action selector="soundSwitchAction:" destination="-1" eventType="touchUpInside" id="CiM-ON-6lB"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="A9G-Kd-n29" firstAttribute="centerY" secondItem="pru-Ua-C7f" secondAttribute="centerY" id="0UL-bG-uZa"/>
+                        <constraint firstItem="XSQ-h6-9MR" firstAttribute="centerX" secondItem="pru-Ua-C7f" secondAttribute="centerX" id="CCH-Up-xI8"/>
+                        <constraint firstAttribute="trailing" secondItem="A9G-Kd-n29" secondAttribute="trailing" id="Sfw-Qx-hgO"/>
+                        <constraint firstItem="XSQ-h6-9MR" firstAttribute="centerY" secondItem="pru-Ua-C7f" secondAttribute="centerY" id="UEj-xI-pXM"/>
+                        <constraint firstItem="A9G-Kd-n29" firstAttribute="height" secondItem="pru-Ua-C7f" secondAttribute="height" multiplier="0.5" id="hvG-Nr-G9j"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.99679701647133168" green="1" blue="0.23614303646616452" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="MxV-S8-BFs" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.9" id="1ob-g3-gO1"/>
+                <constraint firstItem="t13-MZ-4nX" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="2ic-MY-fos"/>
+                <constraint firstItem="pru-Ua-C7f" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.1" id="3MQ-mX-bgD"/>
+                <constraint firstItem="sI7-VF-HyL" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="0.75" id="Hac-MR-vAD"/>
+                <constraint firstItem="KZX-F9-SG4" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Hdb-Cg-r6d"/>
+                <constraint firstAttribute="bottom" secondItem="KZX-F9-SG4" secondAttribute="bottom" id="KBw-Kf-MIt"/>
+                <constraint firstItem="sI7-VF-HyL" firstAttribute="width" secondItem="MxV-S8-BFs" secondAttribute="width" id="S2x-Zb-bL7"/>
+                <constraint firstAttribute="trailing" secondItem="pru-Ua-C7f" secondAttribute="trailing" id="Vum-9D-zr7"/>
+                <constraint firstAttribute="trailing" secondItem="KZX-F9-SG4" secondAttribute="trailing" id="c0w-is-oaf"/>
+                <constraint firstItem="pru-Ua-C7f" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="czp-Vx-bmn"/>
+                <constraint firstItem="KZX-F9-SG4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="mrA-Qd-ije"/>
+                <constraint firstItem="t13-MZ-4nX" firstAttribute="width" secondItem="MxV-S8-BFs" secondAttribute="width" id="qGe-cb-SVt"/>
+                <constraint firstItem="MxV-S8-BFs" firstAttribute="centerX" secondItem="KZX-F9-SG4" secondAttribute="centerX" id="qoZ-SC-8fh"/>
+                <constraint firstItem="MxV-S8-BFs" firstAttribute="centerY" secondItem="KZX-F9-SG4" secondAttribute="centerY" id="vQv-6o-x3d"/>
+                <constraint firstItem="sI7-VF-HyL" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="wVR-Gt-nto"/>
+                <constraint firstItem="pru-Ua-C7f" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="wnn-Wn-7NE"/>
+                <constraint firstItem="t13-MZ-4nX" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="1.25" id="x7s-wG-clh"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="Default" width="320" height="480"/>
+        <image name="howtoplay_ipad" width="490" height="97"/>
+        <image name="play_ipad" width="490" height="97"/>
+        <image name="sound-on" width="32" height="32"/>
+        <image name="store_ipad" width="490" height="97"/>
+    </resources>
+</document>
