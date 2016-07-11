@@ -15,6 +15,14 @@
 		598886A61D2E547E0017295E /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 598886A41D2E547E0017295E /* MainViewController.xib */; };
 		598886A91D2E5B090017295E /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598886A71D2E5B090017295E /* GameViewController.swift */; };
 		598886AA1D2E5B090017295E /* GameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 598886A81D2E5B090017295E /* GameViewController.xib */; };
+		598886AC1D2E75900017295E /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598886AB1D2E75900017295E /* Task.swift */; };
+		59E66CB41D2F596F0021ABA4 /* TasksManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E66CB31D2F596F0021ABA4 /* TasksManager.swift */; };
+		59E66CB61D2F65400021ABA4 /* ViewCellStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E66CB51D2F65400021ABA4 /* ViewCellStack.swift */; };
+		59E66CBA1D2F6C0F0021ABA4 /* ColorFromHexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E66CB91D2F6C0F0021ABA4 /* ColorFromHexString.swift */; };
+		59E66CBF1D2F980C0021ABA4 /* tap.wav in Resources */ = {isa = PBXBuildFile; fileRef = 59E66CBE1D2F980C0021ABA4 /* tap.wav */; };
+		59E66CC11D2F98180021ABA4 /* success.wav in Resources */ = {isa = PBXBuildFile; fileRef = 59E66CC01D2F98180021ABA4 /* success.wav */; };
+		59E66CC31D2F98270021ABA4 /* fail.wav in Resources */ = {isa = PBXBuildFile; fileRef = 59E66CC21D2F98270021ABA4 /* fail.wav */; };
+		59E66CC51D2F982F0021ABA4 /* letter_tap.wav in Resources */ = {isa = PBXBuildFile; fileRef = 59E66CC41D2F982F0021ABA4 /* letter_tap.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +48,14 @@
 		598886A41D2E547E0017295E /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		598886A71D2E5B090017295E /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		598886A81D2E5B090017295E /* GameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameViewController.xib; sourceTree = "<group>"; };
+		598886AB1D2E75900017295E /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		59E66CB31D2F596F0021ABA4 /* TasksManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasksManager.swift; sourceTree = "<group>"; };
+		59E66CB51D2F65400021ABA4 /* ViewCellStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewCellStack.swift; sourceTree = "<group>"; };
+		59E66CB91D2F6C0F0021ABA4 /* ColorFromHexString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorFromHexString.swift; sourceTree = "<group>"; };
+		59E66CBE1D2F980C0021ABA4 /* tap.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tap.wav; sourceTree = "<group>"; };
+		59E66CC01D2F98180021ABA4 /* success.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = success.wav; sourceTree = "<group>"; };
+		59E66CC21D2F98270021ABA4 /* fail.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fail.wav; sourceTree = "<group>"; };
+		59E66CC41D2F982F0021ABA4 /* letter_tap.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = letter_tap.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +97,7 @@
 		598886821D2E54210017295E /* GameSwiftProject */ = {
 			isa = PBXGroup;
 			children = (
+				59E66CBD1D2F97EE0021ABA4 /* Sounds */,
 				598886831D2E54210017295E /* AppDelegate.swift */,
 				5988868A1D2E54210017295E /* Assets.xcassets */,
 				5988868C1D2E54210017295E /* LaunchScreen.storyboard */,
@@ -89,6 +106,10 @@
 				598886A41D2E547E0017295E /* MainViewController.xib */,
 				598886A71D2E5B090017295E /* GameViewController.swift */,
 				598886A81D2E5B090017295E /* GameViewController.xib */,
+				598886AB1D2E75900017295E /* Task.swift */,
+				59E66CB31D2F596F0021ABA4 /* TasksManager.swift */,
+				59E66CB51D2F65400021ABA4 /* ViewCellStack.swift */,
+				59E66CB91D2F6C0F0021ABA4 /* ColorFromHexString.swift */,
 			);
 			path = GameSwiftProject;
 			sourceTree = "<group>";
@@ -100,6 +121,17 @@
 				5988869A1D2E54220017295E /* Info.plist */,
 			);
 			path = GameSwiftProjectTests;
+			sourceTree = "<group>";
+		};
+		59E66CBD1D2F97EE0021ABA4 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				59E66CC21D2F98270021ABA4 /* fail.wav */,
+				59E66CC41D2F982F0021ABA4 /* letter_tap.wav */,
+				59E66CC01D2F98180021ABA4 /* success.wav */,
+				59E66CBE1D2F980C0021ABA4 /* tap.wav */,
+			);
+			name = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,8 +219,12 @@
 			files = (
 				598886AA1D2E5B090017295E /* GameViewController.xib in Resources */,
 				5988868E1D2E54210017295E /* LaunchScreen.storyboard in Resources */,
+				59E66CC31D2F98270021ABA4 /* fail.wav in Resources */,
 				598886A61D2E547E0017295E /* MainViewController.xib in Resources */,
 				5988868B1D2E54210017295E /* Assets.xcassets in Resources */,
+				59E66CC11D2F98180021ABA4 /* success.wav in Resources */,
+				59E66CC51D2F982F0021ABA4 /* letter_tap.wav in Resources */,
+				59E66CBF1D2F980C0021ABA4 /* tap.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,9 +242,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				598886AC1D2E75900017295E /* Task.swift in Sources */,
 				598886841D2E54210017295E /* AppDelegate.swift in Sources */,
+				59E66CB41D2F596F0021ABA4 /* TasksManager.swift in Sources */,
+				59E66CBA1D2F6C0F0021ABA4 /* ColorFromHexString.swift in Sources */,
 				598886A91D2E5B090017295E /* GameViewController.swift in Sources */,
 				598886A51D2E547E0017295E /* MainViewController.swift in Sources */,
+				59E66CB61D2F65400021ABA4 /* ViewCellStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,6 +432,7 @@
 				5988869F1D2E54220017295E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		598886A01D2E54220017295E /* Build configuration list for PBXNativeTarget "GameSwiftProjectTests" */ = {
 			isa = XCConfigurationList;
@@ -400,6 +441,7 @@
 				598886A21D2E54220017295E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
