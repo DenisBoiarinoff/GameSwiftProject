@@ -18,7 +18,7 @@ class MainViewController: UIViewController {
 	var soundURL: NSURL?
 	var soundID:SystemSoundID = 0
 
-	weak var soundBox:SoundBox?
+	weak var soundBox = SoundBox.soundBox
 
 	@IBOutlet weak var titleLabel: UILabel!
 
@@ -49,7 +49,7 @@ class MainViewController: UIViewController {
 	func toPlayController() -> Void {
 		if (gameViewController == nil) {
 			gameViewController = GameViewController();
-			gameViewController.soundBox = self.soundBox
+//			gameViewController.soundBox = self.soundBox
 		}
 
 		gameViewController.isSound = self.isSound
@@ -58,7 +58,7 @@ class MainViewController: UIViewController {
 
 	@IBAction func btnsActions(sender: AnyObject) {
 
-		soundBox?.playSoundWithName("tap")
+		soundBox!.playSoundWithName("tap")
 
 		switch sender.tag {
 		case 11:
