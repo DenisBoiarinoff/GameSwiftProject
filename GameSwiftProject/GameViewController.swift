@@ -112,13 +112,10 @@ class GameViewController: UIViewController {
 		titleLabel.font = UIFont(name: "Arial-BoldMT", size: CGFloat(titleFontSize))
 
 		posibleAnswer = ""
-//		posibleAnswer.removeAll()
 
 		viewCellStack.clear()
 
 		reloadTask()
-//		reloadAnswerView()
-//		reloadLettersView()
 	}
 
 	deinit {
@@ -152,7 +149,6 @@ class GameViewController: UIViewController {
 	}
 
 	func gameIsEnded(notification: NSNotification) -> Void {
-		print ("get the message from TaskManager")
 		let alert = UIAlertController(title: "Sorry!!!",
 		                              message: "game is over!",
 		                              preferredStyle: UIAlertControllerStyle.Alert)
@@ -162,7 +158,6 @@ class GameViewController: UIViewController {
 		}))
 
 		self.presentViewController(alert, animated: true, completion: nil)
-		print ("get the message from TaskManager")
 	}
 
 	// MARK: - Optional Functons 
@@ -177,7 +172,6 @@ class GameViewController: UIViewController {
 				                                                 selector: #selector(taskWasSolved),
 				                                                 name: "TaskIsSolved",
 				                                                 object: currentTask)
-//				reloadAnswerView()
 			}
 
 
@@ -189,7 +183,6 @@ class GameViewController: UIViewController {
 			titleLabel.text = headerText
 
 			questionLabel.text = currentTask?.question
-			//		let answer = Array(arrayLiteral: currentTask.answer)
 			let answer = currentTask?.answer
 
 			for i in 0...NUMBER_OF_LETTER - 1 {
@@ -205,16 +198,12 @@ class GameViewController: UIViewController {
 			dataArray[15] = " "
 			while (answer?.characters.count)! + 2 != letterPositionArray.count {
 				let randomInt = Int(arc4random())
-				print (randomInt, Int(GameViewController.letterList.count) - 1)
 				let randInt = randomInt % (NUMBER_OF_LETTER - 1)
-				print(randInt)
 				let isPresent = letterPositionArray.contains(randInt)
 				if !isPresent {
 					letterPositionArray.append(randInt)
-					//				dataArray[randInt] = answer[letterPositionArray.count - 3]
 					let ix = answer!.startIndex
 					let ix2 = ix.advancedBy(letterPositionArray.count - 3)
-					//				let ix2 = advance(ix,letterPositionArray.count - 3)
 					dataArray[randInt] = answer![ix2]
 				}
 			}
@@ -233,7 +222,6 @@ class GameViewController: UIViewController {
 		let numberOfLabels : Int = currentTask.answer.characters.count
 		let indent = 10.0;
 		let cellGroupWidth = Double(numberOfLabels) * Double(cellSize) + (Double(numberOfLabels) - 1) * indent
-		print(cellGroupWidth)
 		let parentBounds = UIScreen.mainScreen().bounds
 		let parentWidth = parentBounds.size.width
 		let cellGroupLeading = (Double(parentWidth) - cellGroupWidth) / 2
@@ -258,7 +246,6 @@ class GameViewController: UIViewController {
 
 		for j in 0...1 {
 			for i in 0...((NUMBER_OF_LETTER - 1)/2) {
-				print (i + (NUMBER_OF_LETTER/2) * j)
 				let frameRect : CGRect = CGRectMake(CGFloat(5 + Double(i) * (cellSize + 10.0)),
 				                                    CGFloat(5 + Double(j) * (cellSize + 10.0)),
 				                                    CGFloat(cellSize),
