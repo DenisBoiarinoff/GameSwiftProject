@@ -18,9 +18,10 @@ class GameViewController: UIViewController {
 
 	@IBOutlet weak var answerView: UIImageView!
 	@IBOutlet weak var letterView: UIView!
-
 	
 	@IBOutlet weak var coinsBtn: UIButton!
+
+	weak var soundBox = SoundBox.soundBox
 
 	var viewCellStack : ViewCellStack = ViewCellStack()
 	var taskManager : TasksManager = TasksManager()
@@ -60,23 +61,6 @@ class GameViewController: UIViewController {
 
     override func viewDidLoad() -> Void {
         super.viewDidLoad()
-
-		if let filePath = NSBundle.mainBundle().pathForResource("tap", ofType: "wav") {
-			soundURL = NSURL(fileURLWithPath: filePath)
-			AudioServicesCreateSystemSoundID(soundURL!, &tapSoundID)
-		}
-		if let filePath = NSBundle.mainBundle().pathForResource("letter_tap", ofType: "wav") {
-			soundURL = NSURL(fileURLWithPath: filePath)
-			AudioServicesCreateSystemSoundID(soundURL!, &letterTapSoundID)
-		}
-		if let filePath = NSBundle.mainBundle().pathForResource("fail", ofType: "wav") {
-			soundURL = NSURL(fileURLWithPath: filePath)
-			AudioServicesCreateSystemSoundID(soundURL!, &failSoundID)
-		}
-		if let filePath = NSBundle.mainBundle().pathForResource("success", ofType: "wav") {
-			soundURL = NSURL(fileURLWithPath: filePath)
-			AudioServicesCreateSystemSoundID(soundURL!, &successSoundID)
-		}
 
 		coinsBtn.setTitle( String(coins), forState: UIControlState.Normal)
 
@@ -120,18 +104,14 @@ class GameViewController: UIViewController {
 
 	deinit {
 		NSNotificationCenter.defaultCenter().removeObserver(self)
-		AudioServicesDisposeSystemSoundID(tapSoundID)
-		AudioServicesDisposeSystemSoundID(failSoundID)
-		AudioServicesDisposeSystemSoundID(letterTapSoundID)
-		AudioServicesDisposeSystemSoundID(successSoundID)
 	}
 
 	// MARK: - Game Event Functions
 
 	func taskWasSolved(notification: NSNotification) -> Void {
-		if isSound {
-			AudioServicesPlaySystemSound(successSoundID)
-		}
+
+		soundBox?.playSoundWithName("success")
+
 		NSNotificationCenter.defaultCenter().removeObserver(self, name: "TaskIsSolved", object: nil)
 		self.currentTask = nil
 
@@ -404,9 +384,8 @@ class GameViewController: UIViewController {
 		if posibleAnswer.characters.count >= currentTask.answer.characters.count {
 			let isSolved = currentTask.verifyAnswer(posibleAnswer)
 			if !isSolved {
-				if isSound {
-					AudioServicesPlaySystemSound(failSoundID)
-				}
+
+				soundBox?.playSoundWithName("fail")
 
 				let alert = UIAlertController(title: "Oh no!!!",
 				                              message: "Wrong answer!",
@@ -489,16 +468,14 @@ class GameViewController: UIViewController {
 	// MARK: - Buttons Actions
 
 	@IBAction func toMainScreen(sender: AnyObject) {
-		if isSound {
-			AudioServicesPlaySystemSound(tapSoundID)
-		}
+		soundBox?.playSoundWithName("tap")
+
 		self.navigationController?.popToRootViewControllerAnimated(true)
 	}
 
 	@IBAction func letterBtnPressed(sender: AnyObject) -> Void {
-		if isSound {
-			AudioServicesPlaySystemSound(letterTapSoundID)
-		}
+		soundBox?.playSoundWithName("letter_tap")
+
 		let letterIndex: Int = sender.tag
 		switch letterIndex {
 		case 207:

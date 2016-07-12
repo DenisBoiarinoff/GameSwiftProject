@@ -18,6 +18,8 @@ class MainViewController: UIViewController {
 	var soundURL: NSURL?
 	var soundID:SystemSoundID = 0
 
+	weak var soundBox = SoundBox.soundBox
+
 	@IBOutlet weak var titleLabel: UILabel!
 
 	// MARK: - View Life Cycle
@@ -26,13 +28,6 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
 
 		titleLabel.adjustsFontSizeToFitWidth = true
-
-		if let filePath = NSBundle.mainBundle().pathForResource("tap", ofType: "wav") {
-			print("sound");
-			soundURL = NSURL(fileURLWithPath: filePath)
-			AudioServicesCreateSystemSoundID(soundURL!, &soundID)
-		}
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,22 +36,20 @@ class MainViewController: UIViewController {
     }
 
 	deinit {
-		AudioServicesDisposeSystemSoundID(soundID)
 	}
 
 	// MARK: - Buttons Actions
 
 	@IBAction func soundSwitchAction(sender: AnyObject) {
 		if let btn = sender as? UIButton {
-			print("btn")
-			isSound = !isSound
-			btn.selected = !isSound
+			btn.selected = !soundBox!.switchSound()
 		}
 	}
 
 	func toPlayController() -> Void {
 		if (gameViewController == nil) {
 			gameViewController = GameViewController();
+//			gameViewController.soundBox = self.soundBox
 		}
 
 		gameViewController.isSound = self.isSound
@@ -64,10 +57,9 @@ class MainViewController: UIViewController {
 	}
 
 	@IBAction func btnsActions(sender: AnyObject) {
-		if isSound {
-			AudioServicesPlaySystemSound(soundID);
-		}
-		
+
+		soundBox!.playSoundWithName("tap")
+
 		switch sender.tag {
 		case 11:
 			toPlayController()
