@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
 	var navigationController : UINavigationController?
-	var soundBox: SoundBox?
+//	var soundBox: SoundBox?
 
 
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -24,8 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		self.navigationController = UINavigationController(rootViewController: mainMenuController!)
 		self.window!.rootViewController = self.navigationController
 
-		soundBox = SoundBox()
-		mainMenuController!.soundBox = soundBox;
+//		soundBox = SoundBox()
+//		mainMenuController!.soundBox = soundBox;
 
 		self.navigationController!.navigationBarHidden = true
 

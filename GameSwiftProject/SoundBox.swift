@@ -11,22 +11,24 @@ import AudioToolbox
 
 class SoundBox {
 
-	static let soundKeyArray = ["tap",
+	private let soundKeyArray = ["tap",
 	                            "letter_tap",
 	                            "fail",
 	                            "success"]
 
-	static let soundType = "wav"
+	private let soundType = "wav"
 
-	var soundsDictionary = [String:SystemSoundID]()
+	private var soundsDictionary = [String:SystemSoundID]()
 
-	var isSound : Bool = true
+	private var isSound : Bool = true
+
+	static let soundBox = SoundBox()
 
 	// MARK: - Life Cycle
 
-	init() {
-		for name in SoundBox.soundKeyArray {
-			if let filePath = NSBundle.mainBundle().pathForResource(name, ofType: SoundBox.soundType) {
+	private init() {
+		for name in soundKeyArray {
+			if let filePath = NSBundle.mainBundle().pathForResource(name, ofType: soundType) {
 				let soundURL = NSURL(fileURLWithPath: filePath)
 				var soundID : SystemSoundID = 0
 				AudioServicesCreateSystemSoundID(soundURL, &soundID)

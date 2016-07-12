@@ -21,7 +21,7 @@ class GameViewController: UIViewController {
 	
 	@IBOutlet weak var coinsBtn: UIButton!
 
-	weak var soundBox:SoundBox?
+	weak var soundBox = SoundBox.soundBox
 
 	var viewCellStack : ViewCellStack = ViewCellStack()
 	var taskManager : TasksManager = TasksManager()
