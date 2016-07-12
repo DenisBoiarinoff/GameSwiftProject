@@ -32,9 +32,6 @@ struct ViewCellStack {
 
 	func lastView() -> UIView? {
 		let view : UIView? = items.last
-//		if (items.count > 0) {
-//			view = items[items.count - 1]
-//		}
 		return view
 	}
 

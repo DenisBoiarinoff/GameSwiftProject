@@ -24,11 +24,6 @@ class TasksManager : NSObject {
 			                                                 selector:#selector(taskWasSolved),
 			                                                 name: "TaskIsSolved",
 			                                                 object: taskArray[currentTaskNumber])
-/*-----------------------------------------------------------------------------------------------*/
-//			NSNotificationCenter.defaultCenter().addObserver(self,
-//			                                                 selector:"taskWasSolved:",
-//			                                                 name: "TaskIsSolved",
-//			                                                 object: taskArray[currentTaskNumber])
 
 			return taskArray[currentTaskNumber]
 		} else {

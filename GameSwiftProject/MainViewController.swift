@@ -13,10 +13,6 @@ import AudioToolbox
 class MainViewController: UIViewController {
 
 	var gameViewController : GameViewController!
-	var isSound : Bool = true
-
-	var soundURL: NSURL?
-	var soundID:SystemSoundID = 0
 
 	weak var soundBox = SoundBox.soundBox
 
@@ -49,10 +45,8 @@ class MainViewController: UIViewController {
 	func toPlayController() -> Void {
 		if (gameViewController == nil) {
 			gameViewController = GameViewController();
-//			gameViewController.soundBox = self.soundBox
 		}
 
-		gameViewController.isSound = self.isSound
 		self.navigationController?.pushViewController(gameViewController, animated: true)
 	}
 

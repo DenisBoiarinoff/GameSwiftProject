@@ -11,51 +11,56 @@ import AudioToolbox
 
 class GameViewController: UIViewController {
 
-	let NUMBER_OF_LETTER  = 16;
-
 	@IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet weak var questionLabel: UILabel!
 
 	@IBOutlet weak var answerView: UIImageView!
+
 	@IBOutlet weak var letterView: UIView!
 	
 	@IBOutlet weak var coinsBtn: UIButton!
 
 	weak var soundBox = SoundBox.soundBox
 
-	var viewCellStack : ViewCellStack = ViewCellStack()
-	var taskManager : TasksManager = TasksManager()
-	var currentTask : Task!
+	private var viewCellStack : ViewCellStack = ViewCellStack()
+	private var taskManager : TasksManager = TasksManager()
+	private var currentTask : Task!
 
-	var soundURL: NSURL?
-	var tapSoundID: SystemSoundID = 0
-	var letterTapSoundID: SystemSoundID = 0
-	var failSoundID: SystemSoundID = 0
-	var successSoundID: SystemSoundID = 0
+	private let NUMBER_OF_LETTER  = 16;
 
-	var isSound: Bool = true
+	private let LETTER_LIST : [Character] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0",
+	                                         "A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
+	                                         "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
+	                                         "U", "V", "W", "X", "Y", "Z"]
 
-	var coins : Int = 0
-	private var posibleAnswer : String!
+	private var coins : Int = 0
+	private var posibleAnswer : String = ""
 	private var taskNum : Int = 0
 
-	var cellSize : Double = 0
-	var cellFontSize : Double = 0
-	var titleFontSize : Double = 0
+	private var cellSize : Double = {
+		let parentBounds = UIScreen.mainScreen().bounds
+		let parentWidth = parentBounds.size.width
+		return 0.5 * Double(parentWidth / 4) - 10
+	}()
+	private var cellFontSize : Double = {
+		let parentBounds = UIScreen.mainScreen().bounds
+		let parentWidth = parentBounds.size.width
+		let cellSize = 0.5 * Double(parentWidth / 4) - 10
+		return cellSize * 0.7
+	}()
+	private var titleFontSize : Double = {
+		let parentBounds = UIScreen.mainScreen().bounds
+		return Double(parentBounds.size.height) * 0.035
+	}()
 
 	private var dataArray = [Character]()
 
 	private var headerText : String = "Task # "
 
-	static private let letterList : [Character] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0",
-	                                       "A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
-	                                       "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
-	                                       "U", "V", "W", "X", "Y", "Z"]
-
-	let inputBtnImg = "btn_input";
-	let selectedLetterBtnImg = "btn_letter";
-	let stepBackImg = "btn_return";
-	let btnHelpImg = "btn_hint";
+	private let inputBtnImg = "btn_input";
+	private let selectedLetterBtnImg = "btn_letter";
+	private let stepBackImg = "btn_return";
+	private let btnHelpImg = "btn_hint";
 
 	// MARK: - View Life Cycle
 
@@ -84,18 +89,8 @@ class GameViewController: UIViewController {
 	override func viewWillAppear(animated: Bool) -> Void {
 		super.viewWillAppear(animated)
 
-		let parentBounds = UIScreen.mainScreen().bounds
-		let parentWidth = parentBounds.size.width
-		let letterViewHeight = parentWidth / 4
-		cellSize = 0.5 * Double(letterViewHeight) - 10
-
-		cellFontSize = cellSize * 0.7
-		titleFontSize = Double(parentBounds.size.height) * 0.1 * 0.5 * 0.7
-
 		questionLabel.font = UIFont(name: "Arial-BoldMT", size: CGFloat(titleFontSize))
 		titleLabel.font = UIFont(name: "Arial-BoldMT", size: CGFloat(titleFontSize))
-
-		posibleAnswer = ""
 
 		viewCellStack.clear()
 
@@ -122,7 +117,7 @@ class GameViewController: UIViewController {
 			_ in
 			self.reloadTask()
 			self.coins += 10;
-			self.coinsBtn.titleLabel?.text = String(self.coins)
+			self.coinsBtn.setTitle(String(self.coins), forState: UIControlState.Normal)
 			self.viewCellStack.clear()
 		}))
 		self.presentViewController(alert, animated: true, completion: nil)
@@ -142,7 +137,7 @@ class GameViewController: UIViewController {
 
 	// MARK: - Optional Functons 
 
-	func reloadTask() -> Void {
+	private func reloadTask() -> Void {
 
 		if currentTask == nil {
 			currentTask = taskManager.getTask()
@@ -153,8 +148,6 @@ class GameViewController: UIViewController {
 				                                                 name: "TaskIsSolved",
 				                                                 object: currentTask)
 			}
-
-
 		}
 
 		if (currentTask != nil) {
@@ -166,8 +159,8 @@ class GameViewController: UIViewController {
 			let answer = currentTask?.answer
 
 			for i in 0...NUMBER_OF_LETTER - 1 {
-				let randInt = Int(arc4random()) % (Int(GameViewController.letterList.count) - 1)
-				let randChar : Character = GameViewController.letterList[randInt]
+				let randInt = Int(arc4random()) % (Int(LETTER_LIST.count) - 1)
+				let randChar : Character = LETTER_LIST[randInt]
 				dataArray[i] = randChar
 			}
 
@@ -192,7 +185,7 @@ class GameViewController: UIViewController {
 		}
 	}
 
-	func reloadAnswerView() -> Void {
+	private func reloadAnswerView() -> Void {
 		for subview: UIView in answerView.subviews {
 			if !(subview is UIImageView) {
 				subview.removeFromSuperview()
@@ -218,7 +211,7 @@ class GameViewController: UIViewController {
 		}
 	}
 
-	func reloadLettersView() -> Void {
+	private func reloadLettersView() -> Void {
 
 		for subview: UIView in letterView.subviews {
 			subview.removeFromSuperview()
@@ -250,7 +243,7 @@ class GameViewController: UIViewController {
 
 	}
 
-	func helpPopup() -> Void {
+	private func helpPopup() -> Void {
 		let alert = UIAlertController(title: "Problem!?",
 		                              message: "Have you any problem!?\n We dont care!",
 		                              preferredStyle: UIAlertControllerStyle.Alert)
@@ -261,11 +254,12 @@ class GameViewController: UIViewController {
 		self.presentViewController(alert, animated: true, completion: nil)
 	}
 
-	func stepBack() -> Void {
+	private func stepBack() -> Void {
 
 		if posibleAnswer.characters.count != viewCellStack.count() {
 			return
 		}
+
 		let lastLetterPosition: Int = posibleAnswer.characters.count
 		if lastLetterPosition > 0 {
 			posibleAnswer = String(posibleAnswer.characters.prefix(lastLetterPosition - 1))
@@ -283,17 +277,11 @@ class GameViewController: UIViewController {
 
 				lastFullView.text = " "
 
-				let inputImg: UIImage = UIImage(named: inputBtnImg)!
+				let mirroredimage = UIImage(CGImage: UIImage(named: inputBtnImg)!.CGImage!, scale: 1.0, orientation: .DownMirrored)
 
-				let mirroredimage = UIImage(CGImage: inputImg.CGImage!, scale: 1.0, orientation: .DownMirrored)
-				let inputImgSize = lastFullView.frame.size
-
-				UIGraphicsBeginImageContext(inputImgSize)
-				mirroredimage.drawInRect(CGRectMake(0, 0, inputImgSize.width, inputImgSize.height))
-				let newImg = UIGraphicsGetImageFromCurrentImageContext()
-				UIGraphicsEndImageContext()
-
-				lastFullView.layer.backgroundColor = UIColor(patternImage: newImg).CGColor
+				lastFullView.layer.backgroundColor =
+					UIColor(patternImage: getImgFromImgContext(mirroredimage,
+						inRect: CGRectMake(0, 0, lastFullView.frame.width, lastFullView.frame.height))).CGColor
 
 				UIView.animateWithDuration(0.3,
 				                           delay: 0.1,
@@ -311,7 +299,7 @@ class GameViewController: UIViewController {
 		}
 	}
 
-	func letterSelected(letterIndex: Int) {
+	private func letterSelected(letterIndex: Int) {
 
 		let btn : UIButton = letterView.viewWithTag(letterIndex) as! UIButton
 
@@ -322,21 +310,17 @@ class GameViewController: UIViewController {
 		viewCellStack.push(btn)
 
 		let selectedLetter: String = (btn.titleLabel?.text)!
-
 		let animationStartPositionFrame: CGRect = letterView.convertRect(btn.frame, toView: view)
-
 		let lastClearLabel: UILabel = answerView.viewWithTag(99 + viewCellStack.count()) as! UILabel
-
 		let animationEndPositionFrame: CGRect = answerView.convertRect(lastClearLabel.frame, toView: view)
 
 		let animationLabel: UILabel = getCellWithImg(selectedLetterBtnImg,
 		                                             frameRect: animationStartPositionFrame,
 		                                             text: selectedLetter,
 		                                             andTag: 0)
+
 		view.addSubview(animationLabel)
-
 		animationLabel.hidden = false
-
 		btn.hidden = true
 
 		UIView.animateWithDuration(1.0,
@@ -355,7 +339,7 @@ class GameViewController: UIViewController {
 
 	}
 
-	func answerStringIsChanged() -> Void {
+	private func answerStringIsChanged() -> Void {
 		let currentLength = posibleAnswer.characters.count
 		let answerLength = currentTask.answer.characters.count
 
@@ -404,31 +388,26 @@ class GameViewController: UIViewController {
 
 	}
 
-	func getCellWithImg(imgName: String, frameRect frame: CGRect, text: String, andTag tag: Int) -> UILabel {
+	private func getCellWithImg(imgName: String, frameRect frame: CGRect, text: String, andTag tag: Int) -> UILabel {
 
 		let label = UILabel(frame: frame)
+
 		label.text = " "
 		label.tag = tag
 		label.font = UIFont(name: "Arial-BoldMT", size: CGFloat(cellFontSize))
 		label.textColor = UIColor.colorWithHexString("091161", alpha: 1)
 		label.textAlignment = NSTextAlignment.Center
 
-		let letterImg = UIImage(named: imgName)
-		let mirroredimage = UIImage(CGImage: letterImg!.CGImage!, scale: 1.0, orientation: .DownMirrored)
-		let imgSize = label.frame.size
+		let mirroredimage = UIImage(CGImage: UIImage(named: imgName)!.CGImage!, scale: 1.0, orientation: .DownMirrored)
 
-		UIGraphicsBeginImageContext(imgSize)
-		mirroredimage.drawInRect(CGRectMake(0, 0, imgSize.width, imgSize.height))
-		let newImg = UIGraphicsGetImageFromCurrentImageContext()
-		UIGraphicsEndImageContext()
+		label.layer.backgroundColor = UIColor(patternImage: getImgFromImgContext(mirroredimage, inRect: CGRectMake(0, 0, frame.width, frame.height))).CGColor
 
-		label.layer.backgroundColor = UIColor(patternImage: newImg).CGColor
 		label.text = text
 
 		return label
 	}
 
-	func getBtnWithImg(imgName: String, frameRect frame: CGRect, title: String, andTag tag: Int) -> UIButton {
+	private func getBtnWithImg(imgName: String, frameRect frame: CGRect, title: String, andTag tag: Int) -> UIButton {
 
 		let letter: UIButton = UIButton(frame: frame)
 
@@ -436,33 +415,34 @@ class GameViewController: UIViewController {
 		letter.tag = tag
 		letter.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Center
 
-		let letterImg = UIImage(named: imgName)
+		let mirroredimage = UIImage(CGImage: UIImage(named: imgName)!.CGImage!, scale: 1.0, orientation: .DownMirrored)
 
-		let mirroredimage = UIImage(CGImage: letterImg!.CGImage!, scale: 1.0, orientation: .DownMirrored)
-		let letterImgSize = letter.frame.size;
-
-		UIGraphicsBeginImageContext(letterImgSize)
-
-		mirroredimage.drawInRect(CGRectMake(0, 0, letterImgSize.width, letterImgSize.height))
-		let newImg = UIGraphicsGetImageFromCurrentImageContext()
-		UIGraphicsEndImageContext()
-
-		letter.layer.backgroundColor = UIColor(patternImage: newImg).CGColor
+		letter.layer.backgroundColor = UIColor(patternImage: getImgFromImgContext(mirroredimage, inRect: CGRectMake(0, 0, frame.width, frame.height))).CGColor
 
 		letter.titleLabel?.font = UIFont(name: "Arial-BoldMT", size: CGFloat(cellFontSize))
 		letter.setTitleColor(UIColor.colorWithHexString("091161", alpha: 1), forState: UIControlState.Normal)
 
-		letter.addTarget(self, action: #selector(letterBtnPressed), forControlEvents: UIControlEvents.TouchUpInside)
+		letter.addTarget(self,
+		                 action: #selector(letterBtnPressed),
+		                 forControlEvents: UIControlEvents.TouchUpInside)
 
 		return letter
 	}
 
-	func cancelAnswerViewAnimation() -> Void {
+	private func cancelAnswerViewAnimation() -> Void {
 		let num: Int = viewCellStack.count()
 		for _ in 0...num - 1 {
 			stepBack()
 		}
 
+	}
+
+	private func getImgFromImgContext(img: UIImage, inRect rect: CGRect) -> UIImage {
+		UIGraphicsBeginImageContext(rect.size)
+		img.drawInRect(rect)
+		let newImg = UIGraphicsGetImageFromCurrentImageContext()
+		UIGraphicsEndImageContext()
+		return newImg
 	}
 
 	// MARK: - Buttons Actions
