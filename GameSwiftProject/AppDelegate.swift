@@ -13,8 +13,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
 	var navigationController : UINavigationController?
-//	var soundBox: SoundBox?
-
 
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
@@ -23,9 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		let mainMenuController: MainViewController? = MainViewController(nibName: "MainViewController", bundle: nil)
 		self.navigationController = UINavigationController(rootViewController: mainMenuController!)
 		self.window!.rootViewController = self.navigationController
-
-//		soundBox = SoundBox()
-//		mainMenuController!.soundBox = soundBox;
 
 		self.navigationController!.navigationBarHidden = true
 
