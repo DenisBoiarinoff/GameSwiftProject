@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5961D2311D349DAF00696178 /* SoundBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5961D2301D349DAF00696178 /* SoundBox.swift */; };
 		598886841D2E54210017295E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598886831D2E54210017295E /* AppDelegate.swift */; };
 		5988868B1D2E54210017295E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5988868A1D2E54210017295E /* Assets.xcassets */; };
 		5988868E1D2E54210017295E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5988868C1D2E54210017295E /* LaunchScreen.storyboard */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5961D2301D349DAF00696178 /* SoundBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundBox.swift; sourceTree = "<group>"; };
 		598886801D2E54210017295E /* GameSwiftProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameSwiftProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		598886831D2E54210017295E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5988868A1D2E54210017295E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				59E66CB31D2F596F0021ABA4 /* TasksManager.swift */,
 				59E66CB51D2F65400021ABA4 /* ViewCellStack.swift */,
 				59E66CB91D2F6C0F0021ABA4 /* ColorFromHexString.swift */,
+				5961D2301D349DAF00696178 /* SoundBox.swift */,
 			);
 			path = GameSwiftProject;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 				598886AC1D2E75900017295E /* Task.swift in Sources */,
 				598886841D2E54210017295E /* AppDelegate.swift in Sources */,
 				59E66CB41D2F596F0021ABA4 /* TasksManager.swift in Sources */,
+				5961D2311D349DAF00696178 /* SoundBox.swift in Sources */,
 				59E66CBA1D2F6C0F0021ABA4 /* ColorFromHexString.swift in Sources */,
 				598886A91D2E5B090017295E /* GameViewController.swift in Sources */,
 				598886A51D2E547E0017295E /* MainViewController.swift in Sources */,
