@@ -152,7 +152,7 @@ class GameViewController: UIViewController {
 			titleRegion.text = "Task # \(taskNum)"
 
 			questionRegion.text = currentTask?.question
-		    let answer = currentTask?.answer
+			let answer:String = (currentTask?.answer)!
 
 			for i in 0...NUMBER_OF_CELL - 1 {
 				let randInt = Int(arc4random()) % (Int(LETTER_LIST.count) - 1)
@@ -165,15 +165,15 @@ class GameViewController: UIViewController {
 			dataArray[7] = " "
 			letterPositionArray.append(15)
 			dataArray[15] = " "
-			while (answer?.characters.count)! + 2 != letterPositionArray.count {
+			while (answer.characters.count) + 2 != letterPositionArray.count {
 				let randomInt = Int(arc4random())
 				let randInt = randomInt % (NUMBER_OF_CELL - 1)
 				let isPresent = letterPositionArray.contains(randInt)
 				if !isPresent {
 					letterPositionArray.append(randInt)
-					let ix = answer!.startIndex
+					let ix = answer.startIndex
 					let ix2 = ix.advancedBy(letterPositionArray.count - 3)
-					dataArray[randInt] = answer![ix2]
+					dataArray[randInt] = answer[ix2]
 				}
 			}
 			reloadLettersView()
