@@ -9,11 +9,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GameViewController" customModule="GameSwiftProject" customModuleProvider="target">
             <connections>
-                <outlet property="answerView" destination="I4t-xb-SEE" id="mzO-fA-k0f"/>
+                <outlet property="answerRegion" destination="I4t-xb-SEE" id="qol-mK-9N4"/>
                 <outlet property="coinsBtn" destination="geE-39-VkS" id="Pp4-JU-Hyc"/>
-                <outlet property="letterView" destination="ZD4-rw-I8s" id="2mz-6M-5iY"/>
-                <outlet property="questionLabel" destination="V4u-qC-9L6" id="Lyi-fX-NfO"/>
-                <outlet property="titleLabel" destination="rg2-3L-sSf" id="ym5-0d-Wl8"/>
+                <outlet property="letterRegion" destination="ZD4-rw-I8s" id="LEd-dM-ybL"/>
+                <outlet property="questionRegion" destination="V4u-qC-9L6" id="3cx-52-KsM"/>
+                <outlet property="titleRegion" destination="rg2-3L-sSf" id="pfq-vg-G2m"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

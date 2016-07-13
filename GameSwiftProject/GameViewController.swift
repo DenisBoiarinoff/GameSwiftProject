@@ -11,12 +11,12 @@ import AudioToolbox
 
 class GameViewController: UIViewController {
 
-	@IBOutlet weak var titleLabel: UILabel!
-	@IBOutlet weak var questionLabel: UILabel!
+	@IBOutlet weak var titleRegion: UILabel!
+	@IBOutlet weak var questionRegion: UILabel!
 
-	@IBOutlet weak var answerView: UIImageView!
+	@IBOutlet weak var answerRegion: UIImageView!
 
-	@IBOutlet weak var letterView: UIView!
+	@IBOutlet weak var letterRegion: UIView!
 	
 	@IBOutlet weak var coinsBtn: UIButton!
 
@@ -26,7 +26,7 @@ class GameViewController: UIViewController {
 	private var taskManager : TasksManager = TasksManager()
 	private var currentTask : Task!
 
-	private let NUMBER_OF_LETTER  = 16;
+	private let NUMBER_OF_CELL  = 16;
 
 	private let LETTER_LIST : [Character] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0",
 	                                         "A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
@@ -55,8 +55,6 @@ class GameViewController: UIViewController {
 
 	private var dataArray = [Character]()
 
-	private var headerText : String = "Task # "
-
 	private let inputBtnImg = "btn_input";
 	private let selectedLetterBtnImg = "btn_letter";
 	private let stepBackImg = "btn_return";
@@ -74,11 +72,11 @@ class GameViewController: UIViewController {
 		                                                 name: "TasksIsFinish",
 		                                                 object: taskManager)
 
-		for _ in 1...NUMBER_OF_LETTER {
+		for _ in 1...NUMBER_OF_CELL {
 			dataArray.append("0")
 		}
 
-		titleLabel.text = "Task # "
+		titleRegion.text = "Task # "
     }
 
     override func didReceiveMemoryWarning() -> Void {
@@ -89,8 +87,8 @@ class GameViewController: UIViewController {
 	override func viewWillAppear(animated: Bool) -> Void {
 		super.viewWillAppear(animated)
 
-		questionLabel.font = UIFont(name: "Arial-BoldMT", size: CGFloat(titleFontSize))
-		titleLabel.font = UIFont(name: "Arial-BoldMT", size: CGFloat(titleFontSize))
+		questionRegion.font = UIFont(name: "Arial-BoldMT", size: CGFloat(titleFontSize))
+		titleRegion.font = UIFont(name: "Arial-BoldMT", size: CGFloat(titleFontSize))
 
 		viewCellStack.clear()
 
@@ -141,24 +139,22 @@ class GameViewController: UIViewController {
 
 		if currentTask == nil {
 			currentTask = taskManager.getTask()
-			if currentTask != nil {
-				taskNum += 1
-				NSNotificationCenter.defaultCenter().addObserver(self,
-				                                                 selector: #selector(taskWasSolved),
-				                                                 name: "TaskIsSolved",
-				                                                 object: currentTask)
-			}
 		}
 
 		if (currentTask != nil) {
 
-			headerText = "Task # \(taskNum)"
-			titleLabel.text = headerText
+			taskNum += 1
+			NSNotificationCenter.defaultCenter().addObserver(self,
+			                                                 selector: #selector(taskWasSolved),
+			                                                 name: "TaskIsSolved",
+			                                                 object: currentTask)
 
-			questionLabel.text = currentTask?.question
-			let answer = currentTask?.answer
+			titleRegion.text = "Task # \(taskNum)"
 
-			for i in 0...NUMBER_OF_LETTER - 1 {
+			questionRegion.text = currentTask?.question
+		    let answer = currentTask?.answer
+
+			for i in 0...NUMBER_OF_CELL - 1 {
 				let randInt = Int(arc4random()) % (Int(LETTER_LIST.count) - 1)
 				let randChar : Character = LETTER_LIST[randInt]
 				dataArray[i] = randChar
@@ -171,7 +167,7 @@ class GameViewController: UIViewController {
 			dataArray[15] = " "
 			while (answer?.characters.count)! + 2 != letterPositionArray.count {
 				let randomInt = Int(arc4random())
-				let randInt = randomInt % (NUMBER_OF_LETTER - 1)
+				let randInt = randomInt % (NUMBER_OF_CELL - 1)
 				let isPresent = letterPositionArray.contains(randInt)
 				if !isPresent {
 					letterPositionArray.append(randInt)
@@ -186,7 +182,7 @@ class GameViewController: UIViewController {
 	}
 
 	private func reloadAnswerView() -> Void {
-		for subview: UIView in answerView.subviews {
+		for subview: UIView in answerRegion.subviews {
 			if !(subview is UIImageView) {
 				subview.removeFromSuperview()
 			}
@@ -206,37 +202,37 @@ class GameViewController: UIViewController {
 			                                    CGFloat(cellSize),
 												CGFloat(cellSize))
 
-			answerView.addSubview(getCellWithImg(inputBtnImg, frameRect:frameRect, text:" ", andTag:100 + i))
+			answerRegion.addSubview(getCellWithImg(inputBtnImg, frameRect:frameRect, text:" ", andTag:100 + i))
 
 		}
 	}
 
 	private func reloadLettersView() -> Void {
 
-		for subview: UIView in letterView.subviews {
+		for subview: UIView in letterRegion.subviews {
 			subview.removeFromSuperview()
 		}
 
 		for j in 0...1 {
-			for i in 0...((NUMBER_OF_LETTER - 1)/2) {
+			for i in 0...((NUMBER_OF_CELL - 1)/2) {
 				let frameRect : CGRect = CGRectMake(CGFloat(5 + Double(i) * (cellSize + 10.0)),
 				                                    CGFloat(5 + Double(j) * (cellSize + 10.0)),
 				                                    CGFloat(cellSize),
 				                                    CGFloat(cellSize))
 
 				var letterImgName : String
-				if (i + (NUMBER_OF_LETTER/2) * j) == 15 {
+				if (i + (NUMBER_OF_CELL/2) * j) == 15 {
 					letterImgName = stepBackImg
-				} else if (i + (NUMBER_OF_LETTER/2) * j) == 7 {
+				} else if (i + (NUMBER_OF_CELL/2) * j) == 7 {
 					letterImgName = btnHelpImg
 				} else {
 					letterImgName = selectedLetterBtnImg
 				}
 
-				letterView.addSubview(getBtnWithImg(letterImgName,
+				letterRegion.addSubview(getBtnWithImg(letterImgName,
 					                                frameRect: frameRect,
-				                                 	title: String(dataArray[i + (NUMBER_OF_LETTER/2) * j]),
-					                                andTag: 200 + i + (NUMBER_OF_LETTER / 2) * j))
+				                                 	title: String(dataArray[i + (NUMBER_OF_CELL/2) * j]),
+					                                andTag: 200 + i + (NUMBER_OF_CELL / 2) * j))
 
 			}
 		}
@@ -263,11 +259,11 @@ class GameViewController: UIViewController {
 		let lastLetterPosition: Int = posibleAnswer.characters.count
 		if lastLetterPosition > 0 {
 			posibleAnswer = String(posibleAnswer.characters.prefix(lastLetterPosition - 1))
-			let lastFullView: UILabel! = answerView.viewWithTag(99 + viewCellStack.count()) as! UILabel
+			let lastFullView: UILabel! = answerRegion.viewWithTag(99 + viewCellStack.count()) as! UILabel
 			if lastFullView != nil {
-				let animationStartPositionFrame: CGRect = answerView.convertRect(lastFullView.frame, toView: view)
+				let animationStartPositionFrame: CGRect = answerRegion.convertRect(lastFullView.frame, toView: view)
 				let popedCell: UIButton! = viewCellStack.pop() as! UIButton
-				let animationEndPositionFrame: CGRect = letterView.convertRect(popedCell.frame, toView: view)
+				let animationEndPositionFrame: CGRect = letterRegion.convertRect(popedCell.frame, toView: view)
 				let animationLabel: UILabel = getCellWithImg(selectedLetterBtnImg,
 				                                             frameRect: animationStartPositionFrame,
 				                                             text: lastFullView.text!,
@@ -301,7 +297,7 @@ class GameViewController: UIViewController {
 
 	private func letterSelected(letterIndex: Int) {
 
-		let btn : UIButton = letterView.viewWithTag(letterIndex) as! UIButton
+		let btn : UIButton = letterRegion.viewWithTag(letterIndex) as! UIButton
 
 		if viewCellStack.count() >= currentTask.answer.characters.count {
 			return
@@ -310,9 +306,9 @@ class GameViewController: UIViewController {
 		viewCellStack.push(btn)
 
 		let selectedLetter: String = (btn.titleLabel?.text)!
-		let animationStartPositionFrame: CGRect = letterView.convertRect(btn.frame, toView: view)
-		let lastClearLabel: UILabel = answerView.viewWithTag(99 + viewCellStack.count()) as! UILabel
-		let animationEndPositionFrame: CGRect = answerView.convertRect(lastClearLabel.frame, toView: view)
+		let animationStartPositionFrame: CGRect = letterRegion.convertRect(btn.frame, toView: view)
+		let lastClearLabel: UILabel = answerRegion.viewWithTag(99 + viewCellStack.count()) as! UILabel
+		let animationEndPositionFrame: CGRect = answerRegion.convertRect(lastClearLabel.frame, toView: view)
 
 		let animationLabel: UILabel = getCellWithImg(selectedLetterBtnImg,
 		                                             frameRect: animationStartPositionFrame,
@@ -344,7 +340,7 @@ class GameViewController: UIViewController {
 		let answerLength = currentTask.answer.characters.count
 
 		for i in 0...answerLength - 1 {
-			let label: UILabel? = answerView.viewWithTag(100 + i) as? UILabel
+			let label: UILabel? = answerRegion.viewWithTag(100 + i) as? UILabel
 			if label != nil {
 				if (label?.tag)! - 100 < currentLength {
 					let index = posibleAnswer.startIndex.advancedBy(i)
